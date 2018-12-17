@@ -9,7 +9,7 @@ from flask_sqlalchemy import get_debug_queries
 from flask_wtf.csrf import CSRFError
 
 from judiapp.user.views import user_bp
-from judiapp.extensions import bootstrap, db, login_manager, csrf, ckeditor, mail, moment, toolbar, migrate
+from judiapp.extensions import bootstrap, db, login_manager, csrf, ckeditor, mail, moment, migrate
 from judiapp.models import User
 from judiapp.settings import config
 
@@ -43,7 +43,7 @@ def register_extensions(app):
     ckeditor.init_app(app)
     mail.init_app(app)
     moment.init_app(app)
-    toolbar.init_app(app)
+    # toolbar.init_app(app)
     migrate.init_app(app, db)
 
 
@@ -73,8 +73,3 @@ def register_errors(app):
     def handle_csrf_error(e):
         """句柄跨域攻击错误"""
         return render_template('errors/400.html', description=e.description), 400
-
-
-
-
-
