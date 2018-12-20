@@ -1,17 +1,22 @@
 from datetime import datetime
-from flask_login import UserMixin
+from flask_login import UserMixin, AnonymousUserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 from judiapp.extensions import db
 
 
-class User(db.Model, UserMixin):
-    """用户数据模型"""
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(20), unique=True, index=True)    #
-    password_hash = db.column(db.String(20))
-    # password_hash = db.Column(db.String(128))
-    # locale = db.Column(db.String(20))
-    # items = db.relationship('Item', back_populates='author', cascade='all')
+class User(UserMixin, db.Model):
+    """用户类数据模型"""
+    __tablename__ = 'users'
+    id = db.Column(db.Integer, primary_key=True)                    # 用户id
+    name = db.Column(db.String(64))                                 # 用户姓名
+    username = db.Column(db.String(20), unique=True, index=True)    # 账号，唯一
+    password_hash = db.Column(db.String(128))                       # 登录密码（哈希值）
+    email = db.Column(db.String(128), unique=True, index=True)      # 电子信箱，唯一
+    role = db.Column(db.String(20))                                 # 角色
+    active = db.Column(db.Boolean, default=True)                    # 在用
+    confirmed = db.Column(db.Boolean, default=False)                # 用户确认状态
+    login_date = db.Column(db.DateTime(), default=datetime.utcnow)  # 登陆时间
+    last_date = db.Column(db.DateTime(), default=datetime.utcnow)   # 上次离开时间
 
     def set_password(self, password):
         """密码处理后返回哈希值赋值给密码散列值字段"""
@@ -21,5 +26,11 @@ class User(db.Model, UserMixin):
         """将接收到的密码用密码散列值校验"""
         return check_password_hash(self.password_hash, password)
 
+class AnonymousUser(AnonymousUserMixin):
+    def can(self, permissions):
+        return False
 
+    def is_administrator(self):
+        return False
 
+# login_manager.anonymous_user = AnonymousUser

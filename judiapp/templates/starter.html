@@ -1,3 +1,4 @@
+{% from 'bootstrap/nav.html' import render_nav_item %}
 <!DOCTYPE html>
 <!--
 这是起始页面，你可以使用此页面开始你的项目。
@@ -6,6 +7,7 @@
 <html>
 
 <head>
+	{% block head %}
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>人民法院司法技术工作平台 V 3.0</title>
@@ -22,7 +24,8 @@
         您可以选择其他皮肤。皮肤样式写在 body 标签中，
         以便使之生效。 -->
     <link rel="stylesheet" href="static/dist/css/skins/skin-blue.min.css">
-
+	<link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
+	<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" type="text/css">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- 警告：Respond.js 不支持 file:// 方式查看（即本地方式查看）-->
     <!--[if lt IE 9]>
@@ -32,6 +35,7 @@
 
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+	{% endblock head %}
 </head>
 <!--
 BODY 标签选项：
@@ -55,8 +59,9 @@ BODY 标签选项：
 -->
 
 <body class="hold-transition skin-blue sidebar-mini">
-    <div class="wrapper">
 
+    <div class="wrapper">
+		{% block nav %}
         <!-- Main Header -->
         <header class="main-header">
 
@@ -228,7 +233,7 @@ BODY 标签选项：
                 </div>
             </nav>
         </header>
-
+		{% endblock nav %}
         <!-- Left side column. contains the logo and sidebar -->
         <aside class="main-sidebar">
 
@@ -310,7 +315,7 @@ BODY 标签选项：
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
-
+		{% block footer %}
         <!-- Main Footer -->
         <footer class="main-footer">
             <!-- To the right -->
@@ -320,7 +325,7 @@ BODY 标签选项：
             <!-- Default to the left -->
             <strong>Copyright &copy; 2016 <a href="#">Company</a>.</strong> All rights reserved.
         </footer>
-
+		{% endblock footer %}
         <!-- Control Sidebar -->
         <aside class="control-sidebar control-sidebar-dark">
             <!-- Create the tabs -->
