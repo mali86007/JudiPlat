@@ -1,10 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>设置</title>
-</head>
-<body>
+{% extends 'starter.html' %}
+{% from 'bootstrap/form.html' import render_form %}
 
-</body>
-</html>
+{% block title %}设置{% endblock %}
+
+{% block header %}
+设置<small>系统部分设置</small>
+{% endblock header %}
+
+{% block content %}
+    <div class="page-header">
+        <h1 class="display-3">adminLTE版本 系统设置</h1>
+        <h4 class="text-info text-center">&nbsp;各种设置</h4>
+    </div>
+    <div class="row">
+
+    </div>
+{% endblock %}

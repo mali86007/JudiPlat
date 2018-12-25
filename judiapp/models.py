@@ -6,14 +6,14 @@ from judiapp.extensions import db
 
 class User(UserMixin, db.Model):
     """用户类数据模型"""
-    __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)                    # 用户id
     name = db.Column(db.String(64))                                 # 用户姓名
     username = db.Column(db.String(20), unique=True, index=True)    # 账号，唯一
     password_hash = db.Column(db.String(128))                       # 登录密码（哈希值）
     email = db.Column(db.String(128), unique=True, index=True)      # 电子信箱，唯一
-    role = db.Column(db.String(20))                                 # 角色
+    role = db.Column(db.String(20), default='user')                 # 角色
     active = db.Column(db.Boolean, default=True)                    # 在用
+    member_since = db.Column(db.DateTime(), default=datetime.utcnow)    # 注册时间
     confirmed = db.Column(db.Boolean, default=False)                # 用户确认状态
     login_date = db.Column(db.DateTime(), default=datetime.utcnow)  # 登陆时间
     last_date = db.Column(db.DateTime(), default=datetime.utcnow)   # 上次离开时间

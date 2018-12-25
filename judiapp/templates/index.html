@@ -1,12 +1,15 @@
-
 {% extends 'starter.html' %}
 {% from 'bootstrap/form.html' import render_form %}
 
-{% block title %}JudiPlat{% endblock %}
+{% block title %}JudiPlat 首页{% endblock %}
+
+{% block header %}
+主页<small>简短介绍</small>
+{% endblock header %}
 
 {% block content %}
     <div class="page-header">
-        <h1 class="display-3">adminLTE版本的Index</h1>
+        <h2 class="display-3">这是adminLTE版本的首页</h2>
         <h4 class="text-info text-center">&nbsp;"副标题"</h4>
     </div>
     <div class="row">

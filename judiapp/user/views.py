@@ -9,9 +9,9 @@ user_bp = Blueprint('user', __name__)
 
 @user_bp.route('/')
 def index():
-    # return redirect(url_for('index'))
-    return render_template('starter.html')      # 采用adminLTE基模板
-    # return render_template('index.html')      # 采用原有的bootstrap基模板
+    # return redirect(url_for('.index'))
+    # return render_template('starter.html')      # 采用adminLTE基模板
+    return render_template('index.html')      # 采用原有的bootstrap基模板
 
 @user_bp.route('/login', methods=['GET', 'POST'])
 def login():
@@ -48,4 +48,8 @@ def logout():
 @user_bp.route('/about')
 def about():
     flash('关于我自己', 'info')
-    return render_template('user/user_about.html')
+    return render_template('about.html')
+
+@user_bp.route('/settings')
+def settings():
+    return render_template('settings.html')
