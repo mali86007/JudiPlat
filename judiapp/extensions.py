@@ -24,5 +24,5 @@ def load_user(user_id):
     user = User.query.get(int(user_id))
     return user
 
-login_manager.login_view = 'user.login'
-login_manager.login_message_category = 'warning'
+login_manager.login_view = 'user.login'     # 定义登录视图的名称，可用于用户未授权操作的跳转
+login_manager.login_message_category = 'warning'    # 定义提醒消息分类

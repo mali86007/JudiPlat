@@ -28,11 +28,12 @@ class DevelopmentConfig(BaseConfig):
 
 class ProductionConfig(BaseConfig):
     """生产设置类"""
-    # SQLALCHEMY_DATABASE_URI = os.path('DATABASE_URL', prefix + os.path.join(basedir, 'data.db'))    # 生产数据库路径
-    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL', prefix + os.path.join(basedir, 'data.db'))
+    # SQLALCHEMY_DATABASE_URI = os.path('DATABASE_URL', prefix + os.path.join(basedir, 'data.db'))    # 生产数据库路径（从路径中获取？）
+    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL', prefix + os.path.join(basedir, 'data.db'))      # 生产数据库路径（从配置文件中获取）
 
 
 class TestingConfig(BaseConfig):
+    """测试设置类"""
     TESTING = True
     WTF_CSRF_ENABLED = False
     SQLALCHEMY_DATABASE_URI = 'sqlite:///'               # 测试数据库（内存）
