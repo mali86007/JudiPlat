@@ -1,0 +1,22 @@
+{% extends 'starter.html' %}
+
+{% block title %}500 Error{% endblock %}
+
+{% block header %}
+错误 500<small>Internal Server Error</small>
+{% endblock header %}
+
+{% block content %}
+        <div class="card w-50 bg-light">
+            <img class="card-img-top img-fluid" src="{{ url_for('static', filename='images/error.jpg') }}">
+            <div class="card-body">
+                <h5 class="card-title">500 Error</h5>
+                <p class="card-text">网络服务错误 Internal Server Error</p>
+            </div>
+            <div class="card-footer">
+                <div class="float-right">
+                    <a class="btn btn-primary" href="{{ url_for('main.index') }}">返回主页</a>
+                </div>
+            </div>
+        </div>
+{% endblock %}

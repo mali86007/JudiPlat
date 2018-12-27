@@ -23,7 +23,7 @@ class BaseConfig:
 
 class DevelopmentConfig(BaseConfig):
     """开发设置类"""
-    SQLALCHEMY_DATABASE_URI = prefix + os.path.join(basedir, 'data-dev.db')  # 开发数据库路径
+    SQLALCHEMY_DATABASE_URI = prefix + os.path.join(basedir, 'judiapp/data-dev.db')  # 开发数据库路径
 
 
 class ProductionConfig(BaseConfig):

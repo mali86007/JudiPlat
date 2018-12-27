@@ -66,7 +66,7 @@ BODY 标签选项：
         <header class="main-header">
 
             <!-- Logo -->
-            <a href="{{ url_for('.index') }}" class="logo">
+            <a href="{{ url_for('main.index') }}" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini"><b>Juditech</b>plat</span>
                 <!-- logo for regular state and mobile devices -->
@@ -272,8 +272,8 @@ BODY 标签选项：
                 <ul class="sidebar-menu" data-widget="tree">
                     <li class="header">导航</li>
                     <!-- Optionally, you can add icons to the links -->
-                    <li class="active"><a href="{{ url_for('.about') }}"><i class="fa fa-link"></i> <span>关于</span></a></li>
-                    <li><a href="{{ url_for('.settings') }}"><i class="fa fa-link"></i> <span>设置</span></a></li>
+                    <li class="active"><a href="{{ url_for('main.about') }}"><i class="fa fa-link"></i> <span>关于</span></a></li>
+                    <li><a href="{{ url_for('main.settings') }}"><i class="fa fa-link"></i> <span>设置</span></a></li>
                     <li class="treeview">
                         <a href="#"><i class="fa fa-link"></i> <span>用户管理</span>
                             <span class="pull-right-container">

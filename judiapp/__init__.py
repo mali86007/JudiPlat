@@ -1,32 +1,30 @@
-# import logging
 import os
-# from logging.handlers import SMTPHandler, RotatingFileHandler
-
-# import click
+import click
 from flask import Flask, render_template, request
 from flask_login import current_user
 from flask_sqlalchemy import get_debug_queries
 from flask_wtf.csrf import CSRFError
 
-from judiapp.user.views import user_bp
-from judiapp.extensions import bootstrap, db, login_manager, csrf, ckeditor, mail, moment, migrate
-from judiapp.models import User
-from judiapp.settings import config
+from .main import main_bp
+from .user import user_bp
+from .extensions import bootstrap, db, login_manager, csrf, ckeditor, mail, moment, migrate
+from .models import User
+from .settings import config
 
 basedir = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 
 
 def create_app(config_name=None):
+    """工厂函数，生成实例"""
     if config_name is None:
         config_name = os.getenv('FLASK_CONFIG', 'development')  # 默认为开发版本
 
     app = Flask('judiapp')
     app.config.from_object(config[config_name])
 
-    # register_logging(app)
     register_extensions(app)
     register_blueprints(app)
-    # register_commands(app)
+    register_commands(app)
     register_errors(app)
     # register_shell_context(app)
     # register_template_context(app)
@@ -43,13 +41,13 @@ def register_extensions(app):
     ckeditor.init_app(app)
     mail.init_app(app)
     moment.init_app(app)
-    # toolbar.init_app(app)
     migrate.init_app(app, db)
 
 
 def register_blueprints(app):
     """注册蓝本"""
     app.register_blueprint(user_bp)
+    app.register_blueprint(main_bp)
 
 
 def register_errors(app):
@@ -73,3 +71,45 @@ def register_errors(app):
     def handle_csrf_error(e):
         """句柄跨域攻击错误"""
         return render_template('errors/400.html', description=e.description), 400
+
+def register_commands(app):
+    """注册命令行"""
+    @app.cli.command()
+    @click.option('--drop', is_flag=True, help='数据库删除后重建。')
+    def initdb(drop):
+        """初始化数据库"""
+        if drop:
+            click.confirm('这个操作将删除数据库，确认码？', abort=True)
+            db.drop_all()
+            click.echo('数据库已删除。')
+        db.create_all()
+        click.echo('数据库已初始化。')
+
+    @app.cli.command()
+    def init():
+        """初始化系统"""
+        click.echo('数据库正初始化...')
+        db.create_all()
+
+        click.echo('角色-权限正初始化...')
+        # Role.init_role()
+
+        click.echo('系统初始化完成。')
+
+    @app.cli.command()
+    @click.option('--user', default=10, help='用户数量，默认10个。')
+    def forge(user ):
+        """生成虚拟数据"""
+
+        from .fakes import fake_admin, fake_user
+
+        db.drop_all()
+        db.create_all()
+
+        click.echo('角色-权限正初始化......')
+        # Role.init_role()
+        click.echo('系统管理员初始化...')
+        fake_admin()
+        click.echo('生成用户 %d ...' % user)
+        fake_user(user)
+        click.echo('虚拟数据已生成。')

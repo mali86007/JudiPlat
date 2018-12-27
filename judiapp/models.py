@@ -1,7 +1,7 @@
 from datetime import datetime
 from flask_login import UserMixin, AnonymousUserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
-from judiapp.extensions import db
+from .extensions import db, login_manager
 
 
 class User(UserMixin, db.Model):
@@ -33,4 +33,4 @@ class AnonymousUser(AnonymousUserMixin):
     def is_administrator(self):
         return False
 
-# login_manager.anonymous_user = AnonymousUser
+login_manager.anonymous_user = AnonymousUser

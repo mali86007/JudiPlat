@@ -2,7 +2,6 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, BooleanField, PasswordField
 from wtforms.validators import DataRequired, Length
 
-from judiapp.models import User
 
 class LoginForm(FlaskForm):
     """登录表单"""

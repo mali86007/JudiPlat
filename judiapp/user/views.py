@@ -2,28 +2,27 @@ from flask import render_template, flash, redirect, url_for, Blueprint
 from flask_login import login_user, logout_user, login_required, current_user
 
 from judiapp.user.forms import LoginForm
+from . import user_bp
 from judiapp.models import User
 from judiapp.utils import redirect_back
-
-user_bp = Blueprint('user', __name__)
-
-@user_bp.route('/')
-def index():
-    # return redirect(url_for('.index'))
-    # return render_template('starter.html')      # 采用adminLTE基模板
-    return render_template('index.html')      # 采用原有的bootstrap基模板
 
 @user_bp.route('/login', methods=['GET', 'POST'])
 def login():
     """用户登录"""
     if current_user.is_authenticated:
-        return redirect(url_for('starter'))
+        return redirect(url_for('main.index'))
 
     form = LoginForm()
     if form.validate_on_submit():
         username = form.username.data
         password = form.password.data
         remember = form.remember.data
+
+        if username == 'admin' and password == 'mlj':
+            login_user(u, remember)
+            flash('欢迎进来。', 'info')
+            return redirect_back()
+        flash('用户名或者密码无效。', 'warning')
         """
         admin = User.query.first()
         if admin:
@@ -44,12 +43,3 @@ def logout():
     logout_user()
     flash('安全退出。', 'info')
     return redirect_back()
-
-@user_bp.route('/about')
-def about():
-    flash('关于我自己', 'info')
-    return render_template('about.html')
-
-@user_bp.route('/settings')
-def settings():
-    return render_template('settings.html')

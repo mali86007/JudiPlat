@@ -1,0 +1,24 @@
+{% extends 'starter.html' %}
+
+{% block title %}413 Error{% endblock %}
+
+{% block header %}
+错误 413<small>Request Entity Too Large</small>
+{% endblock header %}
+
+{% block content %}
+
+        <div class="card w-50 bg-light">
+            <img class="card-img-top img-fluid" src="{{ url_for('static', filename='images/error.jpg') }}">
+            <div class="card-body">
+                <h5 class="card-title">413 Error</h5>
+                <p class="card-text">请求实体太大  Request Entity Too Large</p>
+            </div>
+            <div class="card-footer">
+                <div class="float-right">
+                    <a class="btn btn-primary" href="{{ url_for('main.index') }}">返回主页</a>
+                </div>
+            </div>
+        </div>
+
+{% endblock %}
