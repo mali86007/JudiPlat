@@ -3,14 +3,17 @@
 
 {% block title %}登录{% endblock %}
 
+{% block header %}
+用户登录<small></small>
+{% endblock header %}
+
 {% block content %}
-    <div class="container h-100">
-        <div class="row h-100 page-header justify-content-center align-items-center">
-            <h1>登录</h1>
-        </div>
-        <div class="row h-100 justify-content-center align-items-center">
-            {{ render_form(form, extra_classes='col-6') }}
-        </div>
+    <div class="container">
+        {{ render_form(form) }}
+    </div>
+    <div class="container">
+        默认用户名：malimali<br>
+        登录密码：mlj
     </div>
 {% endblock %}
 

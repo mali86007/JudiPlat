@@ -9,7 +9,7 @@ def is_safe_url(target):
     return test_url.scheme in ('http', 'https') and ref_url.netloc == test_url.netloc   # 网络协议正确并且两者网络位置一致则True
 
 
-def redirect_back(default='index', **kwargs):
+def redirect_back(default='main.index', **kwargs):
     """获取上个页面的URL"""
     for target in request.args.get('next'), request.referrer:   # 从request.referrer和查询参数next中查找上页面URL
         if not target:
