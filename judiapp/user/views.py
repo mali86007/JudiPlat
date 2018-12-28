@@ -23,11 +23,11 @@ def login():
             flash('登陆成功。', 'info')
             login_user(user, remember)
             return redirect_back()
-        flash('用户名或者密码无效。', 'warning')
+        flash('无效的用户名或者密码。', 'warning')
     return render_template('user/login.html', form=form)
 
-@login_required
 @user_bp.route('/logout')
+@login_required
 def logout():
     """退出登录"""
     logout_user()

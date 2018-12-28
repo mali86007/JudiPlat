@@ -254,6 +254,9 @@ BODY 标签选项：
                             <li><a href="#">普通用户</a></li>
                         </ul>
                     </li>
+                    {% if current_user.is_authenticated %}
+                    <li><a href="{{ url_for('user.logout') }}"><i class="fa fa-link"></i> <span>退出</span></a></li>
+                    {% endif %}
                 </ul>
                 <!-- /.sidebar-menu -->
             </section>
