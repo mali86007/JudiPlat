@@ -20,7 +20,7 @@ def login():
 
         user = User.query.filter_by(username=username).first()
         if user is not None and username == user.username and user.validate_password(password):
-            flash('登陆成功。', 'info')
+            flash('登录成功。', 'info')
             login_user(user, remember)
             return redirect_back()
         flash('无效的用户名或者密码。', 'warning')

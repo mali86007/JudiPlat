@@ -26,7 +26,7 @@ def create_app(config_name=None):
     register_blueprints(app)
     register_commands(app)
     register_errors(app)
-    # register_shell_context(app)
+    register_shell_context(app)
     # register_template_context(app)
     # register_request_handlers(app)
     return app
@@ -48,6 +48,13 @@ def register_blueprints(app):
     """注册蓝本"""
     app.register_blueprint(user_bp)
     app.register_blueprint(main_bp)
+
+
+def register_shell_context(app):
+    """注册命令行上下文"""
+    @app.shell_context_processor
+    def make_shell_context():       # 启动shell时自动导入数据库实例和模型
+        return dict(db=db, User=User)
 
 
 def register_errors(app):
@@ -113,3 +120,5 @@ def register_commands(app):
         click.echo('生成用户 %d ...' % user)
         fake_user(user)
         click.echo('虚拟数据已生成。')
+
+
