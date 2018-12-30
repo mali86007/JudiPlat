@@ -34,8 +34,8 @@ class ProductionConfig(BaseConfig):
 
 class TestingConfig(BaseConfig):
     """测试设置类"""
-    TESTING = True
-    WTF_CSRF_ENABLED = False
+    TESTING = True                                       # 测试模式
+    WTF_CSRF_ENABLED = False                             # CSRF令牌取消
     SQLALCHEMY_DATABASE_URI = 'sqlite:///'               # 测试数据库（内存）
 
 
