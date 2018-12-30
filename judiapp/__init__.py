@@ -1,5 +1,6 @@
 import os
 import click
+# import unittest
 from flask import Flask, render_template, request
 from flask_login import current_user
 from flask_sqlalchemy import get_debug_queries
@@ -120,5 +121,12 @@ def register_commands(app):
         click.echo('生成用户 %d ...' % user)
         fake_user(user)
         click.echo('虚拟数据已生成。')
+
+    @app.cli.command()
+    def test():
+        """运行单元测试"""
+        import unittest
+        test_suite = unittest.TestLoader().discover(('tests'))
+        unittest.TextTestRunner(verbosity=2).run(test_suite)
 
 

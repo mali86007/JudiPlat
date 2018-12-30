@@ -40,3 +40,5 @@ class BaseTestCase(unittest.TestCase):
     def logout(self):
         """登出"""
         return self.client.get(url_for('user.logout'), follow_redirects=True)
+
+
