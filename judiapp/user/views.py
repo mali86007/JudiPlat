@@ -14,14 +14,10 @@ def login():
 
     form = LoginForm()
     if form.validate_on_submit():
-        username = form.username.data
-        password = form.password.data
-        remember = form.remember.data
-
-        user = User.query.filter_by(username=username).first()
-        if user is not None and username == user.username and user.validate_password(password):
+        user = User.query.filter_by(username=form.username.data).first()
+        if user is not None and user.username == form.username.data and user.validate_password(form.password.data):
             flash('登录成功。', 'info')
-            login_user(user, remember)
+            login_user(user, form.remember.data)
             return redirect_back()
         flash('无效的用户名或者密码。', 'warning')
     return render_template('user/login.html', form=form)
