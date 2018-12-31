@@ -123,10 +123,9 @@ def register_commands(app):
         click.echo('虚拟数据已生成。')
 
     @app.cli.command()
-    def test():
+    @click.option('--count', default=2, help="测试模式：默认'count=2'")
+    def test(count):
         """运行单元测试"""
         import unittest
         test_suite = unittest.TestLoader().discover(('tests'))
-        unittest.TextTestRunner(verbosity=2).run(test_suite)
-
-
+        unittest.TextTestRunner(verbosity=count).run(test_suite)
