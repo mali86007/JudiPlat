@@ -9,6 +9,11 @@ if WIN:
 else:
     prefix = 'sqlite:////'
 
+class Operations:
+    CONFIRM = 'confirm'
+    RESET_PASSWORD = 'reset-password'
+    CHANGE_EMAIL = 'change-email'
+
 
 class BaseConfig:
     """基础设置类"""
@@ -16,6 +21,13 @@ class BaseConfig:
     DEBUG_TB_INTERCEPT_REDIRETS = False                                 # 调试，默认False
     SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL', 'sqlite:///' + os.path.join(basedir, 'data.db'))
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+    MAIL_SERVER = os.getenv('MAIL_SERVER')
+    MAIL_PORT = os.getenv('MAIL_PORT')
+    MAIL_USE_SSL = True
+    MAIL_USERNAME = os.getenv('MAIL_USERNAME')
+    MAIL_PASSWORD = os.getenv('MAIL_PASSWORD')
+    MAIL_DEFAULT_SENDER = ('JudiPlat Admin', MAIL_USERNAME)
 
     JUDIPLAT_LOCALES = ['zh_Hans_CN', 'en_US']
     JUDIPLAT_ITEM_PER_PAGE = 20
