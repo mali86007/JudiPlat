@@ -10,9 +10,10 @@
 	{% block head %}
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>人民法院司法技术工作平台 V 3.0 - {% block title %}{% endblock title %}</title>
     <!-- 告诉浏览器该页面是自适应布局 -->
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <title>人民法院司法技术工作平台 V 3.0 - {% block title %}{% endblock title %}</title>
     <link rel="stylesheet" href="static/bower_components/bootstrap/dist/css/bootstrap.min.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="static/bower_components/font-awesome/css/font-awesome.min.css">
@@ -212,7 +213,7 @@ BODY 标签选项：
                     <div class="pull-left info">
                         <p>{{ current_user.name }}</p>
                         <!-- Status -->
-                        <a href="#"><i class="fa fa-circle text-success"></i>在线</a>
+                        <a href="#"><i class="fa fa-circle text-success"></i>{{ current_user.role }}</a>
                     </div>
                 </div>
 				{% else %}
@@ -250,7 +251,7 @@ BODY 标签选项：
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="#">管理员</a></li>
+                            <li><a href="{{ url_for('user.new_user') }}">增加用户</a></li>
                             <li><a href="#">普通用户</a></li>
                         </ul>
                     </li>

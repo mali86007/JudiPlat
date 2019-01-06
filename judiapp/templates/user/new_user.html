@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% from 'bootstrap/form.html' import render_form %}
+
+{% block title %}增加用户{% endblock %}
+
+{% block content %}
+    <div class="container">
+
+            <div class="col-md-4">
+                <div class="card mb-3 w-100 bg-light">
+                    <div class="card-header"><h4>增加新的用户</h4></div>
+                    <div class="card-body">
+                        {{ render_form(form) }}
+                        <hr>
+                        <small>已注册用户? <a href="{{ url_for('.login') }}">直接登录</a>
+                        </small>
+                    </div>
+                </div>
+            </div>
+
+    </div>
+{% endblock %}

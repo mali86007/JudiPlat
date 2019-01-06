@@ -21,6 +21,9 @@ def login():
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
         if user is not None and user.username == form.username.data and user.validate_password(form.password.data):
+            # 用户登录时间存入
+            user.login_date = datetime.now()
+            db.session.commit()
             flash('登录成功。', 'info')
             login_user(user, form.remember.data)
             return redirect_back()
@@ -31,6 +34,11 @@ def login():
 @login_required
 def logout():
     """退出登录"""
+    # 存入退出时间
+    if current_user.is_authenticated:
+        current_user.last_date = datetime.now()
+        db.session.commit()
+    
     logout_user()
     flash('安全退出。', 'info')
     return redirect_back()
@@ -44,14 +52,14 @@ def new_user():
         email = form.email.data.lower()
         username = form.username.data
         password = form.password.data
-        user = User(name=name, email=email, username=username, role='user', active=True, member_since=datetime.utcnow(), confirmed=False)
+        user = User(name=name, email=email, username=username, member_since=datetime.now())
         user.set_password(password)
         db.session.add(user)
         db.session.commit()
         # 生成并向邮箱发送验证令牌
-        token = generate_token(user=user, operation='confirm')
-        send_confirm_email(user=user, token=token)
-        flash('确认邮件已发送，请到您的邮箱查收。', 'info')
+        # token = generate_token(user=user, operation='confirm')
+        # send_confirm_email(user=user, token=token)
+        # flash('确认邮件已发送，请到您的邮箱查收。', 'info')
         return redirect(url_for('user.login'))
     return render_template('user/new_user.html', form=form)
 

@@ -1,20 +1,52 @@
-{% extends 'starter.html' %}
+{% extends 'base.html' %}
 {% from 'bootstrap/form.html' import render_form %}
 
 {% block title %}登录{% endblock %}
 
 {% block header %}
-用户登录<small></small>
+用户<small>登录</small>
 {% endblock header %}
 
 {% block content %}
+    <!--
+    <form class="form-horizontal">
+        <div class="form-group">
+            <label for="inputusername" class="col-md-1 control-label">用户账号</label>
+            <div class="col-md-4">
+                <input type="text" class="form-control" id="inputusername" placeholder="用户账号" value="{{ form.username }}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputpassword" class="col-md-1 control-label">用户账号</label>
+            <div class="col-md-4">
+                <input type="password" class="form-control" id="inputpassword" placeholder="密  码" value="{{ form.password }}">
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-1 col-md-6">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox"> Remember me
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-1 col-md-6">
+                <button type="submit" class="btn btn-default">Sign in</button>
+            </div>
+        </div>
+    </form>
+    -->
+
     <div class="container">
-        {{ render_form(form) }}
+        <div class="col-lg-4 col-md-8">
+            {{ render_form(form) }}
+        </div>
     </div>
+
     <div class="container">
         默认用户名：malimali<br>
         登录密码：mlj
     </div>
 {% endblock %}
-
-{% block footer %}{% endblock %}

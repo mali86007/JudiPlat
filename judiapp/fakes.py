@@ -27,7 +27,7 @@ def fake_admin():
 def fake_user(count=3):
     for i in range(count):
         user = User(name=fake.name(),
-                    confirmed=True,
+                    confirmed=False,
                     username=fake.user_name(),
                     email=fake.email(),
                     role='user',
