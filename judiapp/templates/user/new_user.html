@@ -3,12 +3,16 @@
 
 {% block title %}增加用户{% endblock %}
 
+{% block header %}
+用户管理<small>添加用户</small>
+{% endblock header %}
+
 {% block content %}
     <div class="container">
 
             <div class="col-md-4">
                 <div class="card mb-3 w-100 bg-light">
-                    <div class="card-header"><h4>增加新的用户</h4></div>
+                    <div class="card-header"><h4>&nbsp;</h4></div>
                     <div class="card-body">
                         {{ render_form(form) }}
                         <hr>

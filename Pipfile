@@ -8,7 +8,6 @@ faker = "*"
 
 [packages]
 flask = "*"
-bootstrap-flask = "*"
 flask-ckeditor = "*"
 flask-login = "*"
 flask-mail = "*"
@@ -17,6 +16,7 @@ flask-wtf = "*"
 flask-sqlalchemy = "*"
 flask-migrate = "*"
 python-dotenv = "*"
+bootstrap-flask = "*"
 
 [requires]
 python_version = "3.7"

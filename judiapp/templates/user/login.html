@@ -4,7 +4,7 @@
 {% block title %}登录{% endblock %}
 
 {% block header %}
-用户<small>登录</small>
+用户权限管理<small>登录</small>
 {% endblock header %}
 
 {% block content %}
@@ -40,8 +40,9 @@
     -->
 
     <div class="container">
+        <div class="card-header"><h4>&nbsp;</h4></div>
         <div class="col-lg-4 col-md-8">
-            {{ render_form(form) }}
+            {{ render_form(form, button_map={'submit':'primary'}) }}
         </div>
     </div>
 

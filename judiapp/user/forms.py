@@ -15,9 +15,9 @@ class LoginForm(FlaskForm):
 class NewUserForm(FlaskForm):
     """新增用户窗体"""
     name = StringField('姓名', validators=[DataRequired(), Length(1, 30)])        # 用户真实姓名
-    email = StringField('电子信息', validators=[DataRequired(), Length(1, 254), Email()])   # 用户电子信箱
-    username = StringField('用户账号', validators=[DataRequired(), Length(1, 20), Regexp('^[a-zA-Z0-9]*$', message='用户账号只能包含字母和数字。')])  # 用户账号
-    password = PasswordField('预置密码', validators=[DataRequired(), Length(6, 128), EqualTo('password2')]) # 新增用户是预置的登录密码
+    email = StringField('电子邮箱', validators=[DataRequired(), Length(1, 254), Email(message='电子邮箱格式不正确。')])   # 用户电子信箱
+    username = StringField('用户账号', validators=[DataRequired(), Length(1, 20), Regexp('^[a-zA-Z0-9]*$', message='用户账号只包含字母和数字。')])  # 用户账号
+    password = PasswordField('预置密码', validators=[DataRequired(), Length(6, 32, message='密码长度6-32位'), EqualTo('password2', message='两次输入密码不一致。') ]) # 新增用户是预置的登录密码
     password2 = PasswordField('确认密码', validators=[DataRequired()])                                  # 密码确认
     submit = SubmitField()
 
@@ -35,8 +35,8 @@ class NewUserForm(FlaskForm):
 class EditUserForm(FlaskForm):
     """编辑用户窗体（角色、是否激活）"""
     name = StringField('姓名', validators=[DataRequired(), Length(1, 30)])        # 用户真实姓名，不可修改
-    email = StringField('电子信息', validators=[DataRequired(), Length(1, 254), Email()])   # 用户电子信箱，需要保持唯一
-    username = StringField('用户账号', validators=[DataRequired(), Length(1, 20), Regexp('^[a-zA-Z0-9]*$', message='用户账号只能包含字母和数字。')])  # 用户账号，需要保持唯一
+    email = StringField('电子信息', validators=[DataRequired(), Length(1, 254), Email(message='电子邮箱格式不正确。')])   # 用户电子信箱，需要保持唯一
+    username = StringField('用户账号', validators=[DataRequired(), Length(1, 20), Regexp('^[a-zA-Z0-9]*$', message='用户账号只包含字母和数字。')])  # 用户账号，需要保持唯一
     role = StringField('角色', validators=[DataRequired()])            # 用户角色
     active = BooleanField('用户激活', validators=[DataRequired()])     # 用户是否激活
     submit = SubmitField()
