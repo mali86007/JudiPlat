@@ -4,8 +4,12 @@
 {% block title %}设置{% endblock %}
 
 {% block header %}
-设置<small>系统部分设置</small>
-{% endblock header %}
+    <h1>设置
+        <small>系统设置和用户设置</small></h1>
+    <ol class="breadcrumb">
+        <li><a href="{{ url_for('main.index') }}"><i class="fa fa-dashboard"></i>主页</a></li>
+        <li><a href="{{ url_for('main.settings') }}"><i class="fa fa-dashboard active"></i> 设置</a></li>
+    </ol>{% endblock header %}
 
 {% block content %}
     <div class="container">

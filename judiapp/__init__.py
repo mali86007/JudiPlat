@@ -105,7 +105,7 @@ def register_commands(app):
         click.echo('系统初始化完成。')
 
     @app.cli.command()
-    @click.option('--user', default=5, help='用户数量，默认5个。')
+    @click.option('--user', default=10, help='用户数量，默认10个。')
     def forge(user ):
         """生成虚拟数据"""
 

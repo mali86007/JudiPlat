@@ -67,8 +67,7 @@ def new_user():
 @user_bp.route('/list_user', methods=['GET', 'POST'])
 def list_user():
     """用户列表"""
-    # page = request.args.get('page', 1, type=int)
-    page = 1
+    page = request.args.get('page', 1, type=int)
     pagination = User.query.order_by(User.username.desc()).paginate(page, per_page=20)
     users = pagination.items
     return render_template('user/list_user.html', pagination=pagination, users=users)

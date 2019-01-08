@@ -3,45 +3,105 @@
 
 {% block title %}管理用户{% endblock %}
 
+{% block header %}
+    <h1>管理用户
+        <small>系统管理员和普通用户</small></h1>
+    <ol class="breadcrumb">
+        <li><a href="{{ url_for('main.index') }}"><i class="fa fa-dashboard"></i>主页</a></li>
+        <li><a href="{{ url_for('user.new_user') }}"><i class="fa fa-dashboard"></i> 用户管理</a></li>
+        <li class="active">用户列表</li>
+    </ol>
+{% endblock header %}
+
 {% block content %}
-<div class="page-header">
-    <h1>用户
-        <small class="text-muted">{{ pagination.total }}</small>
-        <span class="float-right"><a class="btn btn-primary btn-sm"
-                                     href="{{ url_for('.new_user') }}">添加用户</a></span>
-    </h1>
-</div>
-{% if users %}
-<table class="table table-striped">
-    <thead>
-    <tr>        
-        <th>用户名</th>
-        <th>账号</th>
-        <th>邮箱</th>
-        <th>角色</th>
-        <th>激活状态</th>
-        <th>确认状态</th>
-        <th>注册时间</th>
-        <th>登录时间</th>        
-        <th>离开时间</th>
-    </tr>
-    </thead>
-    {% for user in users %}
-    <tr>
-        <td>{{ user.name }}</td>
-        <td>{{ user.username }}</td>
-        <td>{{ user.email }}</td>
-        <td>{{ user.role }}</td>
-        <td>{{ user.active }}</td>
-        <td>{{ user.confirmed }}</td>
-        <td>{{ moment(user.member_since).format('LL') }}</td>
-        <td>{{ moment(user.login_date).format('LL') }}</td>
-        <td>{{ moment(user.last_date).format('LL') }}</td>
-    </tr>
-    {% endfor %}
-</table>
-<div class="page-footer">{{ render_pagination(pagination) }}</div>
+<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">所有用户</h3>
+                </div>
+                <div class="box-body">
+                    {% if users %}
+                    <table id="tab_user" class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>用户名</th>
+                                <th>账号</th>
+                                <th>邮箱</th>
+                                <th>角色</th>
+                                <th>激活状态</th>
+                                <th>确认状态</th>
+                                <th>注册时间</th>
+                                <th>登录时间</th>
+                                <th>离开时间</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for user in users %}
+                            <tr>
+                                <td>{{ user.name }}</td>
+                                <td>{{ user.username }}</td>
+                                <td>{{ user.email }}</td>
+                                <td>{{ user.role }}</td>
+                                <td>{{ user.active }}</td>
+                                <td>{{ user.confirmed }}</td>
+                                <td>{{ user.member_since }}</td>
+                                <td>{{ user.login_date }}</td>
+                                <td>{{ user.last_date }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>用户名</th>
+                                <th>账号</th>
+                                <th>邮箱</th>
+                                <th>角色</th>
+                                <th>激活状态</th>
+                                <th>确认状态</th>
+                                <th>注册时间</th>
+                                <th>登录时间</th>
+                                <th>离开时间</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 {% else %}
-<div class="tip"><h5>没有了。</h5></div>
+<div class="tip"><h5>没有数据</h5></div>
 {% endif %}
 {% endblock %}
+
+{% block script %}
+<!-- DataTables -->
+<script src="static/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="static/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<!-- SlimScroll -->
+<script src="static/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<!-- FastClick -->
+<script src="static/bower_components/fastclick/lib/fastclick.js"></script>
+
+<script>
+  $(function () {
+    $('#tab_user').DataTable({
+      'paging'      : true,
+      'lengthChange': false,
+      'searching'   : false,
+      'ordering'    : true,
+      'info'        : true,
+      'autoWidth'   : false,
+      'language': {
+                 "lengthMenu": "每页 _MENU_ 条记录",
+                 "zeroRecords": "没有找到记录",
+                 "info": "第 _PAGE_ 页 ( 总共 _PAGES_ 页 )",
+                 "infoEmpty": "无记录",
+                 "infoFiltered": "(从 _MAX_ 条记录过滤)"
+             }
+    })
+  })
+</script>
+{% endblock script %}

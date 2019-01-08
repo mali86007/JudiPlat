@@ -4,7 +4,11 @@
 {% block title %}JudiPlat 首页{% endblock %}
 
 {% block header %}
-主页<small>简短介绍</small>
+    <h1>主页
+        <small>司法技术工作平台</small></h1>
+    <ol class="breadcrumb">
+        <li><a href="{{ url_for('main.index') }}"><i class="fa fa-dashboard active"></i>主页</a></li>
+    </ol>
 {% endblock header %}
 
 {% block content %}

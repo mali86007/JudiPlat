@@ -24,7 +24,7 @@ def fake_admin():
     db.session.commit()
 
 
-def fake_user(count=3):
+def fake_user(count=30):
     for i in range(count):
         user = User(name=fake.name(),
                     confirmed=False,

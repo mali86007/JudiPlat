@@ -4,7 +4,12 @@
 {% block title %}关于{% endblock %}
 
 {% block header %}
-关于<small>简短的自我介绍</small>
+    <h1>关于
+        <small>简短的自我介绍</small></h1>
+    <ol class="breadcrumb">
+        <li><a href="{{ url_for('main.index') }}"><i class="fa fa-dashboard"></i>主页</a></li>
+        <li class="active">关于</li>
+    </ol>
 {% endblock header %}
 
 {% block content %}

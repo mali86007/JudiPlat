@@ -26,7 +26,7 @@
         以便使之生效。 -->
     <link rel="stylesheet" href="static/dist/css/skins/skin-blue.min.css">
 	<link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
-	<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" type="text/css">
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- 警告：Respond.js 不支持 file:// 方式查看（即本地方式查看）-->
     <!--[if lt IE 9]>
@@ -276,15 +276,9 @@ BODY 标签选项：
             <!-- Content Header (页眉) -->
 
             <section class="content-header">
-            <!--    <h1>
-                    管理用户
-                    <small>系统管理员和普通用户</small>
-                </h1>  -->
-                <h1>{% block header %}{% endblock header %}</h1>
-                <ol class="breadcrumb">
-                    <li><a href="#"><i class="fa fa-dashboard"></i> 层级</a></li>
-                    <li class="active">这里</li>
-                </ol>
+                {% block header %}
+                {% endblock header %}
+
             </section>
 
             <!-- Main content -->
@@ -403,6 +397,7 @@ BODY 标签选项：
     <!-- 或者，
      您可以添加Slimscroll和FastClick插件。
      user experience. -->
+{% block script %} {% endblock script %}
 </body>
 
 </html>
