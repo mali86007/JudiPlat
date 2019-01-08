@@ -35,11 +35,26 @@ class NewUserForm(FlaskForm):
 class EditUserForm(FlaskForm):
     """编辑用户窗体（角色、是否激活）"""
     name = StringField('姓名', validators=[DataRequired(), Length(1, 30)])        # 用户真实姓名，不可修改
-    email = StringField('电子信息', validators=[DataRequired(), Length(1, 254), Email(message='电子邮箱格式不正确。')])   # 用户电子信箱，需要保持唯一
+    email = StringField('电子信箱', validators=[DataRequired(), Length(1, 254), Email(message='电子邮箱格式不正确。')])   # 用户电子信箱，需要保持唯一
     username = StringField('用户账号', validators=[DataRequired(), Length(1, 20), Regexp('^[a-zA-Z0-9]*$', message='用户账号只包含字母和数字。')])  # 用户账号，需要保持唯一
     role = StringField('角色', validators=[DataRequired()])            # 用户角色
     active = BooleanField('用户激活', validators=[DataRequired()])     # 用户是否激活
     submit = SubmitField()
+
+
+"""
+class ListUserForm(FlaskForm):
+    # 用户列表窗体
+    name = StringField('姓名', validators=[DataRequired(), Length(1, 30)])        # 用户真实姓名
+    email = StringField('电子信箱', validators=[DataRequired(), Length(1, 254), Email()])   # 用户电子信箱
+    username = StringField('用户账号', validators=[DataRequired(), Length(1, 20), Regexp('^[a-zA-Z0-9]*$')])  # 用户账号
+    role = StringField('角色', validators=[DataRequired()])            # 用户角色
+    active = BooleanField('用户激活', validators=[DataRequired()])     # 用户是否激活
+    confirmed = BooleanField('已确认')
+    member_since = StringField('注册时间')
+    login_date = StringField('登录时间')
+    last_date = StringField('离开时间')
+"""
 
 class ForgetPasswordForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Length(1, 254), Email()])

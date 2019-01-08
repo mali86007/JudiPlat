@@ -252,7 +252,7 @@ BODY 标签选项：
                         </a>
                         <ul class="treeview-menu">
                             <li><a href="{{ url_for('user.new_user') }}">增加用户</a></li>
-                            <li><a href="#">普通用户</a></li>
+                            <li><a href="{{ url_for('user.list_user') }}">用户列表</a></li>
                         </ul>
                     </li>
                     {% if current_user.is_authenticated %}

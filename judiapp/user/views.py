@@ -1,5 +1,5 @@
 from datetime import datetime
-from flask import render_template, flash, redirect, url_for, Blueprint
+from flask import render_template, flash, redirect, url_for, Blueprint, request
 from flask_login import login_user, logout_user, login_required, current_user
 
 from .forms import LoginForm, NewUserForm, ForgetPasswordForm, ResetPasswordForm
@@ -62,6 +62,16 @@ def new_user():
         # flash('确认邮件已发送，请到您的邮箱查收。', 'info')
         return redirect(url_for('user.login'))
     return render_template('user/new_user.html', form=form)
+
+
+@user_bp.route('/list_user', methods=['GET', 'POST'])
+def list_user():
+    """用户列表"""
+    # page = request.args.get('page', 1, type=int)
+    page = 1
+    pagination = User.query.order_by(User.username.desc()).paginate(page, per_page=20)
+    users = pagination.items
+    return render_template('user/list_user.html', pagination=pagination, users=users)
 
 
 @user_bp.route('/confirm/<token>')
