@@ -17,6 +17,7 @@ flask-sqlalchemy = "*"
 flask-migrate = "*"
 python-dotenv = "*"
 bootstrap-flask = "*"
+flask-debugtoolbar = "*"
 
 [requires]
 python_version = "3.7"

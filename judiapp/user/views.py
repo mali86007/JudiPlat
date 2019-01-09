@@ -80,11 +80,11 @@ def edit_user(user_id):
     user = User.query.get_or_404(user_id)
 
     if form.validate_on_submit():
-        name = form.name.data
-        email = form.email.data.lower()
-        username = form.username.data
-        role = form.role.data
-        active = form.active.data
+        user.name = form.name.data
+        user.email = form.email.data.lower()
+        user.username = form.username.data
+        user.role = form.role.data
+        user.active = form.active.data
         db.session.commit()
         flash('修改了这条用户数据。', 'success')
         return redirect(url_for('user.list_user', form=form))
@@ -95,6 +95,16 @@ def edit_user(user_id):
     form.role.data = user.role
     form.active.data = user.active
     return render_template('user/edit_user.html', form=form)
+
+
+@user_bp.route('/<int:user_id>/delete_user', methods=['POST'])
+def delete_user(user_id):
+    """删除用户"""
+    user = User.query.get_or_404(user_id)
+    db.session.delete(user)
+    db.session.commit()
+    # flash('删除了一条用户数据。', 'success')
+    return redirect(url_for('user.list_user'))
 
 
 @user_bp.route('/confirm/<token>')
