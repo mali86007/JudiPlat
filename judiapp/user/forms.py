@@ -19,7 +19,7 @@ class NewUserForm(FlaskForm):
     username = StringField('用户账号', validators=[DataRequired(), Length(1, 20), Regexp('^[a-zA-Z0-9]*$', message='用户账号只包含字母和数字。')])  # 用户账号
     password = PasswordField('预置密码', validators=[DataRequired(), Length(6, 32, message='密码长度6-32位'), EqualTo('password2', message='两次输入密码不一致。') ]) # 新增用户是预置的登录密码
     password2 = PasswordField('确认密码', validators=[DataRequired()])                                  # 密码确认
-    submit = SubmitField()
+    submit = SubmitField('确定提交')
 
     def validate_email(self, field):
         """邮箱唯一验证"""
@@ -39,7 +39,7 @@ class EditUserForm(FlaskForm):
     username = StringField('用户账号', validators=[DataRequired(), Length(1, 20), Regexp('^[a-zA-Z0-9]*$', message='用户账号只包含字母和数字。')])  # 用户账号，需要保持唯一
     role = StringField('角色', validators=[DataRequired()])            # 用户角色
     active = BooleanField('用户激活', validators=[DataRequired()])     # 用户是否激活
-    submit = SubmitField()
+    submit = SubmitField('确定提交')
 
 
 class ForgetPasswordForm(FlaskForm):

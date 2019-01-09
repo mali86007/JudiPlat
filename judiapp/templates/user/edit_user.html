@@ -1,15 +1,15 @@
 {% extends 'base.html' %}
 {% from 'bootstrap/form.html' import render_form %}
 
-{% block title %}增加用户{% endblock %}
+{% block title %}编辑用户{% endblock %}
 
 {% block header %}
     <h1>用户管理
-        <small>增加用户</small></h1>
+        <small>编辑用户</small></h1>
     <ol class="breadcrumb">
         <li><a href="{{ url_for('main.index') }}"><i class="fa fa-dashboard"></i>主页</a></li>
         <li><a href="{{ url_for('user.list_user') }}"><i class="fa fa-dashboard"></i> 用户管理</a></li>
-        <li class="active">增加用户</li>
+        <li class="active">编辑用户</li>
     </ol>
 {% endblock header %}
 
@@ -20,11 +20,8 @@
                     <div class="card-header"><h4>&nbsp;</h4></div>
                     <div class="card-body">
                         {{ render_form(form) }}
-                        <hr>
-                        <small>已注册用户? <a href="{{ url_for('.login') }}">直接登录</a>
-                        </small>
                     </div>
                 </div>
             </div>
     </div>
-{% endblock %}
+{% endblock content%}

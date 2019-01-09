@@ -1,8 +1,8 @@
 from datetime import datetime
-from flask import render_template, flash, redirect, url_for, Blueprint, request
+from flask import render_template, flash, redirect, url_for, Blueprint, request, current_app
 from flask_login import login_user, logout_user, login_required, current_user
 
-from .forms import LoginForm, NewUserForm, ForgetPasswordForm, ResetPasswordForm
+from .forms import LoginForm, NewUserForm, ForgetPasswordForm, ResetPasswordForm, EditUserForm
 from . import user_bp
 from ..models import User, AnonymousUser
 from ..utils import redirect_back, generate_token, validate_token
@@ -68,9 +68,33 @@ def new_user():
 def list_user():
     """用户列表"""
     page = request.args.get('page', 1, type=int)
-    pagination = User.query.order_by(User.username.desc()).paginate(page, per_page=20)
+    pagination = User.query.order_by(User.username.desc()).paginate(page, per_page=current_app.config['JUDIPLAT_ITEM_PER_PAGE'])
     users = pagination.items
     return render_template('user/list_user.html', pagination=pagination, users=users)
+
+
+@user_bp.route('/<int:user_id>/edit_user', methods=['GET', 'POST'])
+def edit_user(user_id):
+    """编辑用户"""
+    form = EditUserForm()
+    user = User.query.get_or_404(user_id)
+
+    if form.validate_on_submit():
+        name = form.name.data
+        email = form.email.data.lower()
+        username = form.username.data
+        role = form.role.data
+        active = form.active.data
+        db.session.commit()
+        flash('修改了这条用户数据。', 'success')
+        return redirect(url_for('user.list_user', form=form))
+
+    form.name.data = user.name
+    form.email.data = user.email
+    form.username.data = user.username
+    form.role.data = user.role
+    form.active.data = user.active
+    return render_template('user/edit_user.html', form=form)
 
 
 @user_bp.route('/confirm/<token>')

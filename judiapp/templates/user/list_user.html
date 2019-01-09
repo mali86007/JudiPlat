@@ -26,6 +26,7 @@
                     <table id="tab_user" class="table table-bordered table-hover">
                         <thead>
                             <tr>
+                                <th>序号</th>
                                 <th>用户名</th>
                                 <th>账号</th>
                                 <th>邮箱</th>
@@ -35,11 +36,13 @@
                                 <th>注册时间</th>
                                 <th>登录时间</th>
                                 <th>离开时间</th>
+                                <th>操作</th>
                             </tr>
                         </thead>
                         <tbody>
                         {% for user in users %}
                             <tr>
+                                <td>{{ loop.index + ((pagination.page - 1) * pagination.per_page) }}</td>
                                 <td>{{ user.name }}</td>
                                 <td>{{ user.username }}</td>
                                 <td>{{ user.email }}</td>
@@ -49,11 +52,15 @@
                                 <td>{{ user.member_since }}</td>
                                 <td>{{ user.login_date }}</td>
                                 <td>{{ user.last_date }}</td>
+                                <td>
+                                    <a class="btn btn-info btn-sm" href="{{ url_for('user.edit_user', user_id=user.id) }}">编辑</a>
+                                </td>
                             </tr>
                         {% endfor %}
                         </tbody>
                         <tfoot>
                             <tr>
+                                <th>序号</th>
                                 <th>用户名</th>
                                 <th>账号</th>
                                 <th>邮箱</th>
@@ -63,6 +70,7 @@
                                 <th>注册时间</th>
                                 <th>登录时间</th>
                                 <th>离开时间</th>
+                                <th>操作</th>
                             </tr>
                         </tfoot>
                     </table>
@@ -80,10 +88,10 @@
 <!-- DataTables -->
 <script src="static/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
 <script src="static/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
-<!-- SlimScroll -->
-<script src="static/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-<!-- FastClick -->
-<script src="static/bower_components/fastclick/lib/fastclick.js"></script>
+<!-- SlimScroll
+<script src="static/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>-->
+<!-- FastClick
+<script src="static/bower_components/fastclick/lib/fastclick.js"></script>-->
 
 <script>
   $(function () {
@@ -97,9 +105,21 @@
       'language': {
                  "lengthMenu": "每页 _MENU_ 条记录",
                  "zeroRecords": "没有找到记录",
-                 "info": "第 _PAGE_ 页 ( 总共 _PAGES_ 页 )",
+                 "info": "第 _PAGE_ 页  共 _TOTAL_ 项",
                  "infoEmpty": "无记录",
-                 "infoFiltered": "(从 _MAX_ 条记录过滤)"
+                 "infoFiltered": "(从 _MAX_ 条记录过滤)",
+                 "sEmptyTable": "表中数据为空",
+                 "oPaginate": {
+                        "sFirst": "首页",
+                        "sPrevious": "上页",
+                        "sNext": "下页",
+                        "sLast": "末页"
+                 },
+                 "oAria": {
+                        "sSortAscending": ": 以升序排列此列",
+                        "sSortDescending": ": 以降序排列此列"
+                 }
+
              }
     })
   })

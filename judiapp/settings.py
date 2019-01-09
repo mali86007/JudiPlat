@@ -30,7 +30,7 @@ class BaseConfig:
     MAIL_DEFAULT_SENDER = ('JudiPlat Admin', MAIL_USERNAME)
 
     JUDIPLAT_LOCALES = ['zh_Hans_CN', 'en_US']
-    JUDIPLAT_ITEM_PER_PAGE = 20
+    JUDIPLAT_ITEM_PER_PAGE = 15
 
 
 class DevelopmentConfig(BaseConfig):
