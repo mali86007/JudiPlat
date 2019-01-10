@@ -5,7 +5,7 @@ from flask_mail import Mail
 from flask_moment import Moment
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import CSRFProtect
-from flask_debugtoolbar import DebugToolbarExtension
+# from flask_debugtoolbar import DebugToolbarExtension
 from flask_migrate import Migrate
 
 bootstrap = Bootstrap()             # bootstrap实例
@@ -15,7 +15,7 @@ csrf = CSRFProtect()                # CSRF令牌实例
 ckeditor = CKEditor()               # 富文本编辑器实例
 mail = Mail()                       # 电子邮箱实例
 moment = Moment()                   # 本地化实例
-toolbar = DebugToolbarExtension()
+# toolbar = DebugToolbarExtension()
 migrate = Migrate()                 # 数据库迁移实例
 
 @login_manager.user_loader
