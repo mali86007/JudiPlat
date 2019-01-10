@@ -36,7 +36,6 @@ def generate_token(user, operation, expire_in=None, **kwargs):
 def validate_token(user, token, operation, new_password=None):
     """验证并解析令牌"""
     s = Serializer(current_app.config['SECRET_KEY'])                # 用相同密钥创建序列化对象
-
     try:
         data = s.loads(token)                                       # 接受令牌值，提取数据
     except (SignatureExpired, BadSignature):                        # 提取失败，抛出异常：签名过期、不匹配

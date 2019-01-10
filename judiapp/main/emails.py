@@ -24,6 +24,7 @@ def send_mail(to, subject, template, **kwargs):
 
 
 def send_confirm_email(user, token, to=None):
+    """发送验证邮件"""
     send_mail(subject='Email Confirm', to=to or user.email, template='emails/confirm', user=user, token=token)
 
 
