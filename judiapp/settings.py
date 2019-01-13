@@ -18,7 +18,7 @@ class Operations:
 class BaseConfig:
     """基础设置类"""
     SECRET_KEY = os.getenv('SECRET_KEY', 'a secret string')             # 密钥
-    DEBUG_TB_INTERCEPT_REDIRETS = False                                 # 调试，默认False
+    DEBUG_TB_INTERCEPT_REDIRETS = False                                 # 调试，默认False，关闭DebugToolbar拦截重定向
     SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL', 'sqlite:///' + os.path.join(basedir, 'data.db'))
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 

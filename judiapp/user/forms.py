@@ -43,15 +43,29 @@ class EditUserForm(FlaskForm):
 
 
 class ForgetPasswordForm(FlaskForm):
+    """找回密码窗体"""
     email = StringField('Email', validators=[DataRequired(), Length(1, 254), Email()])
-    submit = SubmitField()
+    submit = SubmitField('确定')
 
 
 class ResetPasswordForm(FlaskForm):
+    """重置密码窗体"""
     email = StringField('Email', validators=[DataRequired(), Length(1, 254), Email()])
     password = PasswordField('Password', validators=[
         DataRequired(), Length(8, 128), EqualTo('password2')])
     password2 = PasswordField('Confirm password', validators=[DataRequired()])
+    submit = SubmitField('确定')
+
+''' 使用找回密码窗体
+class ChangeEmailForm(FlaskForm):
+    email = StringField('New Email', validators=[DataRequired(), Length(1, 254), Email()])
     submit = SubmitField()
+'''
 
-
+class ChangePasswordForm(FlaskForm):
+    """变更密码窗体"""
+    old_password = PasswordField('Old Password', validators=[DataRequired()])
+    password = PasswordField('New Password', validators=[
+        DataRequired(), Length(8, 128), EqualTo('password2')])
+    password2 = PasswordField('Confirm Password', validators=[DataRequired()])
+    submit = SubmitField('确定')

@@ -244,6 +244,11 @@ BODY 标签选项：
                     <!-- Optionally, you can add icons to the links -->
                     <li class="active"><a href="{{ url_for('main.about') }}"><i class="fa fa-link"></i> <span>关于</span></a></li>
                     <li><a href="{{ url_for('main.settings') }}"><i class="fa fa-link"></i> <span>设置</span></a></li>
+					<li><a href="{{ url_for('user.forget_password') }}"><i class="fa fa-link"></i> <span>忘记密码</span></a></li>
+                    <li><a href="{{ url_for('user.reset_password', token=token) }}"><i class="fa fa-link"></i> <span>重置密码</span></a></li>
+                    <li><a href="{{ url_for('user.change_password') }}"><i class="fa fa-link"></i> <span>修改密码</span></a></li>                    
+                    <li><a href="{{ url_for('user.change_email_request') }}"><i class="fa fa-link"></i> <span>修改邮箱</span></a></li>
+					<li><a href="{{ url_for('user.change_email', token=token) }}"><i class="fa fa-link"></i> <span>修改邮箱(带令牌)</span></a></li>
                     <li class="treeview">
                         <a href="#"><i class="fa fa-link"></i> <span>用户管理</span>
                             <span class="pull-right-container">
