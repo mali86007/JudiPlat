@@ -1,6 +1,6 @@
 from datetime import datetime
 from flask import render_template, flash, redirect, url_for, Blueprint, request, current_app
-from flask_login import login_user, logout_user, login_required, current_user, fresh_login_required
+from flask_login import login_user, logout_user, login_required, current_user, fresh_login_required, confirm_login, login_fresh
 
 from .forms import LoginForm, NewUserForm, ForgetPasswordForm, ResetPasswordForm, EditUserForm, ChangePasswordForm
 from . import user_bp
@@ -28,6 +28,19 @@ def login():
             login_user(user, form.remember.data)
             return redirect_back()
         flash('无效的用户名或者密码。', 'warning')
+    return render_template('user/login.html', form=form)
+
+@user_bp.route('/re-authenticate', methods=['GET', 'POST'])
+@login_required
+def re_authenticate():
+    """重新登录"""
+    if login_fresh():
+        return redirect(url_for('main.index'))
+
+    form = LoginForm()
+    if form.validate_on_submit() and current_user.validate_password(form.password.data):
+        confirm_login()
+        return redirect_back()
     return render_template('user/login.html', form=form)
 
 @user_bp.route('/logout')
@@ -151,7 +164,7 @@ def forget_password():
             return redirect(url_for('.login'))
         flash('无效邮箱。', 'warning')
         return redirect(url_for('.forget_password'))    # 无效邮箱，重定向重置密码
-    return render_template('user/reset_password.html', form=form) # 表单验证未通过，返回重置密码界面
+    return render_template('user/reset_password.html', form=form)    # 表单验证未通过，返回重置密码界面
 
 
 @user_bp.route('/reset-password/<token>', methods=['GET', 'POST'])
