@@ -7,6 +7,7 @@ from flask_sqlalchemy import get_debug_queries
 from flask_wtf.csrf import CSRFError
 
 from .main import main_bp
+from .auth import auth_bp
 from .user import user_bp
 from .extensions import bootstrap, db, login_manager, csrf, ckeditor, mail, moment, migrate
 from .models import User
@@ -50,6 +51,7 @@ def register_blueprints(app):
     """注册蓝本"""
     app.register_blueprint(user_bp)
     app.register_blueprint(main_bp)
+    app.register_blueprint(auth_bp)
 
 
 def register_shell_context(app):

@@ -5,13 +5,6 @@ from wtforms import ValidationError
 
 from ..models import User
 
-class LoginForm(FlaskForm):
-    """登录表单"""
-    username = StringField('用户名', validators=[DataRequired(), Length(1, 20)])
-    password = PasswordField('密码', validators=[DataRequired(), Length(1, 128)])
-    remember = BooleanField('记住我')
-    submit = SubmitField('登录')
-
 class NewUserForm(FlaskForm):
     """新增用户窗体"""
     name = StringField('姓名', validators=[DataRequired(), Length(1, 30)])        # 用户真实姓名
@@ -40,32 +33,3 @@ class EditUserForm(FlaskForm):
     role = StringField('角色', validators=[DataRequired()])            # 用户角色
     active = BooleanField('用户激活', validators=[DataRequired()])     # 用户是否激活
     submit = SubmitField('确定提交')
-
-
-class ForgetPasswordForm(FlaskForm):
-    """找回密码窗体"""
-    email = StringField('Email', validators=[DataRequired(), Length(1, 254), Email()])
-    submit = SubmitField('确定')
-
-
-class ResetPasswordForm(FlaskForm):
-    """重置密码窗体"""
-    email = StringField('Email', validators=[DataRequired(), Length(1, 254), Email()])
-    password = PasswordField('Password', validators=[
-        DataRequired(), Length(8, 128), EqualTo('password2')])
-    password2 = PasswordField('Confirm password', validators=[DataRequired()])
-    submit = SubmitField('确定')
-
-''' 使用找回密码窗体
-class ChangeEmailForm(FlaskForm):
-    email = StringField('New Email', validators=[DataRequired(), Length(1, 254), Email()])
-    submit = SubmitField()
-'''
-
-class ChangePasswordForm(FlaskForm):
-    """变更密码窗体"""
-    old_password = PasswordField('Old Password', validators=[DataRequired()])
-    password = PasswordField('New Password', validators=[
-        DataRequired(), Length(8, 128), EqualTo('password2')])
-    password2 = PasswordField('Confirm Password', validators=[DataRequired()])
-    submit = SubmitField('确定')

@@ -4,8 +4,10 @@
 {% block title %}增加用户{% endblock %}
 
 {% block header %}
-    <h1>用户管理
-        <small>增加用户</small></h1>
+    <h1>
+        用户管理
+        <small>增加用户</small>
+    </h1>
     <ol class="breadcrumb">
         <li><a href="{{ url_for('main.index') }}"><i class="fa fa-dashboard"></i>主页</a></li>
         <li><a href="{{ url_for('user.list_user') }}"><i class="fa fa-dashboard"></i> 用户管理</a></li>
@@ -21,7 +23,7 @@
                     <div class="card-body">
                         {{ render_form(form) }}
                         <hr>
-                        <small>已注册用户? <a href="{{ url_for('.login') }}">直接登录</a>
+                        <small>已注册用户? <a href="{{ url_for('auth.login') }}">直接登录</a>
                         </small>
                     </div>
                 </div>

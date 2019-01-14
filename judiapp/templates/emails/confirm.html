@@ -1,6 +1,6 @@
 <p>{{ user.username }}，您好</p>
 <p>欢迎加入 <b>JudiPlat</b>!</p>
 <p>请访问这个链接，确认您的邮箱。<br>
-    <a href="{{ url_for('user.confirm', token=token, _external=True) }}">{{ url_for('user.confirm', token=token, _external=True) }}</a>
+    <a href="{{ url_for('auth.confirm', token=token, _external=True) }}">{{ url_for('auth.confirm', token=token, _external=True) }}</a>
 </p>
 <small>（如果不是您的邮箱注册，请不要回复。）</small>

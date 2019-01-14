@@ -4,6 +4,6 @@
 
 请点击下面链接，验证邮箱：
 
-    {{ url_for('user.confirm', token=token, _external=True) }}
+    {{ url_for('auth.confirm', token=token, _external=True) }}
 
 （如果不是您的邮箱注册，请勿回复。）

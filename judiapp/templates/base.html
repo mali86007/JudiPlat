@@ -184,9 +184,9 @@ BODY 标签选项：
                         <!-- User Account Menu -->
                         <li class="dropdown user user-menu">
                             {% if current_user.is_authenticated %}
-							<a href="{{ url_for('user.logout', next=request.full_path) }}">退出</a>
+							<a href="{{ url_for('auth.logout', next=request.full_path) }}">退出</a>
                             {% else %}
-                            <a href="{{ url_for('user.login', next=request.full_path) }}">登录</a>
+                            <a href="{{ url_for('auth.login', next=request.full_path) }}">登录</a>
                             {% endif %}
                         </li>
                         <!-- Control Sidebar Toggle Button -->
@@ -244,11 +244,11 @@ BODY 标签选项：
                     <!-- Optionally, you can add icons to the links -->
                     <li class="active"><a href="{{ url_for('main.about') }}"><i class="fa fa-link"></i> <span>关于</span></a></li>
                     <li><a href="{{ url_for('main.settings') }}"><i class="fa fa-link"></i> <span>设置</span></a></li>
-					<li><a href="{{ url_for('user.forget_password') }}"><i class="fa fa-link"></i> <span>忘记密码</span></a></li>
-                    <li><a href="{{ url_for('user.reset_password', token=token) }}"><i class="fa fa-link"></i> <span>重置密码</span></a></li>
-                    <li><a href="{{ url_for('user.change_password') }}"><i class="fa fa-link"></i> <span>修改密码</span></a></li>                    
-                    <li><a href="{{ url_for('user.change_email_request') }}"><i class="fa fa-link"></i> <span>修改邮箱</span></a></li>
-					<li><a href="{{ url_for('user.change_email', token=token) }}"><i class="fa fa-link"></i> <span>修改邮箱(带令牌)</span></a></li>
+					<li><a href="{{ url_for('auth.forget_password') }}"><i class="fa fa-link"></i> <span>忘记密码</span></a></li>
+                    <li><a href="{{ url_for('auth.reset_password', token=token) }}"><i class="fa fa-link"></i> <span>重置密码</span></a></li>
+                    <li><a href="{{ url_for('auth.change_password') }}"><i class="fa fa-link"></i> <span>修改密码</span></a></li>
+                    <li><a href="{{ url_for('auth.change_email_request') }}"><i class="fa fa-link"></i> <span>修改邮箱</span></a></li>
+					<li><a href="{{ url_for('auth.change_email', token=token) }}"><i class="fa fa-link"></i> <span>修改邮箱(带令牌)</span></a></li>
                     <li class="treeview">
                         <a href="#"><i class="fa fa-link"></i> <span>用户管理</span>
                             <span class="pull-right-container">
@@ -261,7 +261,7 @@ BODY 标签选项：
                         </ul>
                     </li>
                     {% if current_user.is_authenticated %}
-                    <li><a href="{{ url_for('user.logout') }}"><i class="fa fa-link"></i> <span>退出</span></a></li>
+                    <li><a href="{{ url_for('auth.logout') }}"><i class="fa fa-link"></i> <span>退出</span></a></li>
                     {% endif %}
                 </ul>
                 <!-- /.sidebar-menu -->
@@ -281,9 +281,8 @@ BODY 标签选项：
             <!-- Content Header (页眉) -->
 
             <section class="content-header">
-                {% block header %}
-                {% endblock header %}
-
+                   {% block header %}
+                   {% endblock header %}
             </section>
 
             <!-- Main content -->
