@@ -18,7 +18,7 @@ def new_user():
         email = form.email.data.lower()
         username = form.username.data
         password = form.password.data
-        user = User(name=name, email=email, username=username, member_since=datetime.now())
+        user = User(name=name, email=email, username=username, role_id=1, member_since=datetime.now())
         user.set_password(password)
         db.session.add(user)
         db.session.commit()

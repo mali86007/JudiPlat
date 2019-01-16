@@ -55,7 +55,6 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(20), unique=True, index=True)    # 账号，唯一
     password_hash = db.Column(db.String(128))                       # 登录密码（哈希值）
     email = db.Column(db.String(128), unique=True, index=True)      # 电子信箱，唯一
-    # role = db.Column(db.String(20), default='user')                 # 角色
     role_id = db.Column(db.Integer, db.ForeignKey('role.id'))       # 角色id
     role = db.relationship('Role', back_populates='users')          # 相应角色集
     active = db.Column(db.Boolean, default=True)                    # 在用
@@ -67,7 +66,7 @@ class User(UserMixin, db.Model):
     def __init__(self, **kwargs):
         """用户模型初始化"""
         super(User, self).__init__(**kwargs)
-        self.set_role()
+        # self.set_role()
 
     def set_role(self):
         """设置角色"""
