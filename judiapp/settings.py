@@ -29,6 +29,7 @@ class BaseConfig:
     MAIL_PASSWORD = os.getenv('MAIL_PASSWORD')
     MAIL_DEFAULT_SENDER = ('JudiPlat Admin', MAIL_USERNAME)
     MAIL_SUBJECT_PREFIX = '[JudiPlat]'
+    JUDIPLAT_ADMIN_EMAIL = os.getenv('JUDIPLAT_ADMIN', 'malj007@sina.com')
 
     JUDIPLAT_LOCALES = ['zh_Hans_CN', 'en_US']
     JUDIPLAT_ITEM_PER_PAGE = 15

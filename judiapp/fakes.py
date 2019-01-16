@@ -15,11 +15,11 @@ def fake_admin():
     admin = User(name='Malj',
                  username='malimali',
                  email='malj007@tom.com',
-                 role='manager',
                  active=True,
                  member_since=fake.date_time_this_year(),
                  confirmed=True)
     admin.set_password('mlj')
+    admin.role.name = '系统管理员'
     db.session.add(admin)
     db.session.commit()
 
@@ -30,7 +30,6 @@ def fake_user(count=30):
                     confirmed=False,
                     username=fake.user_name(),
                     email=fake.email(),
-                    role='user',
                     active=True,
                     member_since=fake.date_this_decade())
         user.set_password('123456')

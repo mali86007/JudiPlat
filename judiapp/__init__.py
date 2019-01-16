@@ -10,7 +10,7 @@ from .main import main_bp
 from .auth import auth_bp
 from .user import user_bp
 from .extensions import bootstrap, db, login_manager, csrf, ckeditor, mail, moment, migrate
-from .models import User
+from .models import User, Role
 from .settings import config
 
 basedir = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
@@ -103,7 +103,7 @@ def register_commands(app):
         db.create_all()
 
         click.echo('角色-权限正初始化...')
-        # Role.init_role()
+        Role.init_role()
 
         click.echo('系统初始化完成。')
 
@@ -118,7 +118,7 @@ def register_commands(app):
         db.create_all()
 
         click.echo('角色-权限正初始化......')
-        # Role.init_role()
+        Role.init_role()
         click.echo('系统管理员初始化...')
         fake_admin()
         click.echo('生成用户 %d ...' % user)

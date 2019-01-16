@@ -29,12 +29,14 @@ login_manager.login_message_category = 'warning'    # 定义提醒消息分类
 
 
 class Guest(AnonymousUserMixin):
-
+    """匿名访客"""
     def can(self, permission_name):
+        """是否有权"""
         return False
 
     @property
     def is_admin(self):
+        """是否系统管理员"""
         return False
 
 
