@@ -3,7 +3,7 @@ from flask import render_template, flash, redirect, url_for, request, current_ap
 
 from .forms import NewUserForm, EditUserForm
 from . import user_bp
-from ..models import User, AnonymousUser
+from ..models import User, Role, AnonymousUser
 from ..utils import redirect_back, generate_token, validate_token
 from ..extensions import db
 from ..main.emails import send_confirm_email
@@ -36,6 +36,7 @@ def list_user():
     page = request.args.get('page', 1, type=int)
     pagination = User.query.order_by(User.username.desc()).paginate(page, per_page=current_app.config['JUDIPLAT_ITEM_PER_PAGE'])
     users = pagination.items
+    # roles = Role.query.all()
     return render_template('user/list_user.html', pagination=pagination, users=users)
 
 

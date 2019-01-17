@@ -9,7 +9,7 @@ from flask_wtf.csrf import CSRFError
 from .main import main_bp
 from .auth import auth_bp
 from .user import user_bp
-from .extensions import bootstrap, db, login_manager, csrf, ckeditor, mail, moment, migrate
+from .extensions import bootstrap, db, login_manager, csrf, ckeditor, mail, moment, migrate, toolbar
 from .models import User, Role
 from .settings import config
 
@@ -44,7 +44,7 @@ def register_extensions(app):
     mail.init_app(app)
     moment.init_app(app)
     migrate.init_app(app, db)
-    # toolbar.init_app(app)
+    toolbar.init_app(app)
 
 
 def register_blueprints(app):
